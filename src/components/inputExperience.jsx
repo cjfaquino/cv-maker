@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import DisplayExperience from './DisplayExperience';
+
 export default class InputExperience extends Component {
   constructor() {
     super();
@@ -59,9 +61,17 @@ export default class InputExperience extends Component {
     });
   };
 
+  editExperience = () => {
+    const { experience } = this.state;
+    this.setState({
+      editable: true,
+      input: experience,
+    });
+  };
+
   onSubmitExperience = (e) => {
-    const { input } = this.state;
     e.preventDefault();
+    const { input } = this.state;
     this.setState({
       experience: input,
       editable: false,
@@ -74,11 +84,10 @@ export default class InputExperience extends Component {
         until: '',
       },
     });
-    console.log(this.state.experience);
   };
 
   render() {
-    const { input, editable } = this.state;
+    const { input, editable, experience } = this.state;
 
     const label = {
       name: 'Company',
@@ -92,7 +101,7 @@ export default class InputExperience extends Component {
     return (
       <div>
         {editable ? (
-          <form>
+          <form onSubmit={this.onSubmitExperience}>
             <label>
               {label.name}
               <input
@@ -149,7 +158,13 @@ export default class InputExperience extends Component {
 
             <button type='submit'>Save</button>
           </form>
-        ) : null}
+        ) : (
+          <DisplayExperience
+            label={label}
+            experience={experience}
+            editExperience={this.editExperience}
+          />
+        )}
       </div>
     );
   }
