@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import DisplayEducation from './DisplayEducation';
+
 export default class InputEducation extends Component {
   constructor(props) {
     super(props);
@@ -51,10 +53,20 @@ export default class InputEducation extends Component {
     });
   };
 
+  editEducation = () => {
+    const { education } = this.state;
+    console.log(education);
+    this.setState({
+      editable: true,
+      input: education,
+    });
+  };
+
   onSubmitEducation = (e) => {
     e.preventDefault();
     const { input } = this.state;
     this.setState({
+      editable: false,
       education: input,
       input: {
         name: '',
@@ -67,10 +79,10 @@ export default class InputEducation extends Component {
   };
 
   render() {
-    const { editable } = this.state;
+    const { editable, education, input } = this.state;
 
     const label = {
-      name: 'College name',
+      name: 'College',
       city: 'City',
       state: 'State',
       degree: 'Degree',
@@ -82,32 +94,58 @@ export default class InputEducation extends Component {
           <form onSubmit={this.onSubmitEducation}>
             <label>
               {label.degree}
-              <input type='text' onChange={this.handleDegree} />
+              <input
+                type='text'
+                value={input.degree}
+                onChange={this.handleDegree}
+              />
             </label>
 
             <label>
               {label.subject}
-              <input type='text' onChange={this.handleSubject} />
+              <input
+                type='text'
+                value={input.subject}
+                onChange={this.handleSubject}
+              />
             </label>
 
             <label>
               {label.name}
-              <input type='text' onChange={this.handleName} />
+              <input
+                type='text'
+                value={input.name}
+                onChange={this.handleName}
+              />
             </label>
 
             <label>
               {label.city}
-              <input type='text' onChange={this.handleCity} />
+              <input
+                type='text'
+                value={input.city}
+                onChange={this.handleCity}
+              />
             </label>
 
             <label>
               {label.state}
-              <input type='text' onChange={this.handleState} />
+              <input
+                type='text'
+                value={input.state}
+                onChange={this.handleState}
+              />
             </label>
 
             <button type='submit'>Save</button>
           </form>
-        ) : null}
+        ) : (
+          <DisplayEducation
+            label={label}
+            education={education}
+            editEducation={this.editEducation}
+          />
+        )}
       </div>
     );
   }
