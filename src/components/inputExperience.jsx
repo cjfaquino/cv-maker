@@ -19,46 +19,11 @@ export default class InputExperience extends Component {
     };
   }
 
-  handleName = (e) => {
+  handleInput = (type) => (e) => {
     const { input } = this.state;
-    this.setState({
-      experience: Object.assign(input, { name: e.target.value }),
-    });
-  };
-
-  handleCity = (e) => {
-    const { input } = this.state;
-    this.setState({
-      experience: Object.assign(input, { city: e.target.value }),
-    });
-  };
-
-  handleState = (e) => {
-    const { input } = this.state;
-    this.setState({
-      experience: Object.assign(input, { state: e.target.value }),
-    });
-  };
-
-  handleFrom = (e) => {
-    const { input } = this.state;
-    this.setState({
-      experience: Object.assign(input, { from: e.target.value }),
-    });
-  };
-
-  handleUntil = (e) => {
-    const { input } = this.state;
-    this.setState({
-      experience: Object.assign(input, { until: e.target.value }),
-    });
-  };
-
-  handlePosition = (e) => {
-    const { input } = this.state;
-    this.setState({
-      experience: Object.assign(input, { position: e.target.value }),
-    });
+    let obj = {};
+    obj[type] = e.target.value;
+    this.setState({ input: Object.assign(input, obj) });
   };
 
   editExperience = () => {
@@ -108,7 +73,7 @@ export default class InputExperience extends Component {
               <input
                 type='text'
                 value={input.name}
-                onChange={this.handleName}
+                onChange={this.handleInput('name')}
               />
             </label>
 
@@ -117,7 +82,7 @@ export default class InputExperience extends Component {
               <input
                 type='text'
                 value={input.position}
-                onChange={this.handlePosition}
+                onChange={this.handleInput('position')}
               />
             </label>
 
@@ -126,7 +91,7 @@ export default class InputExperience extends Component {
               <input
                 type='text'
                 value={input.city}
-                onChange={this.handleCity}
+                onChange={this.handleInput('city')}
               />
             </label>
 
@@ -135,7 +100,7 @@ export default class InputExperience extends Component {
               <input
                 type='text'
                 value={input.state}
-                onChange={this.handleState}
+                onChange={this.handleInput('state')}
               />
             </label>
 
@@ -144,7 +109,7 @@ export default class InputExperience extends Component {
               <input
                 type='text'
                 value={input.from}
-                onChange={this.handleFrom}
+                onChange={this.handleInput('from')}
               />
             </label>
 
@@ -153,7 +118,7 @@ export default class InputExperience extends Component {
               <input
                 type='text'
                 value={input.until}
-                onChange={this.handleUntil}
+                onChange={this.handleInput('until')}
               />
             </label>
 

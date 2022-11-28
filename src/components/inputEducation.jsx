@@ -18,44 +18,15 @@ export default class InputEducation extends Component {
     };
   }
 
-  handleDegree = (e) => {
+  handleInput = (type) => (e) => {
     const { input } = this.state;
-    this.setState({
-      input: Object.assign(input, { degree: e.target.value }),
-    });
-  };
-
-  handleSubject = (e) => {
-    const { input } = this.state;
-    this.setState({
-      input: Object.assign(input, { subject: e.target.value }),
-    });
-  };
-
-  handleName = (e) => {
-    const { input } = this.state;
-    this.setState({
-      input: Object.assign(input, { name: e.target.value }),
-    });
-  };
-
-  handleCity = (e) => {
-    const { input } = this.state;
-    this.setState({
-      input: Object.assign(input, { city: e.target.value }),
-    });
-  };
-
-  handleState = (e) => {
-    const { input } = this.state;
-    this.setState({
-      input: Object.assign(input, { state: e.target.value }),
-    });
+    let obj = {};
+    obj[type] = e.target.value;
+    this.setState({ input: Object.assign(input, obj) });
   };
 
   editEducation = () => {
     const { education } = this.state;
-    console.log(education);
     this.setState({
       editable: true,
       input: education,
@@ -98,7 +69,7 @@ export default class InputEducation extends Component {
               <input
                 type='text'
                 value={input.degree}
-                onChange={this.handleDegree}
+                onChange={this.handleInput('degree')}
               />
             </label>
 
@@ -107,7 +78,7 @@ export default class InputEducation extends Component {
               <input
                 type='text'
                 value={input.subject}
-                onChange={this.handleSubject}
+                onChange={this.handleInput('subject')}
               />
             </label>
 
@@ -116,7 +87,7 @@ export default class InputEducation extends Component {
               <input
                 type='text'
                 value={input.name}
-                onChange={this.handleName}
+                onChange={this.handleInput('name')}
               />
             </label>
 
@@ -125,7 +96,7 @@ export default class InputEducation extends Component {
               <input
                 type='text'
                 value={input.city}
-                onChange={this.handleCity}
+                onChange={this.handleInput('city')}
               />
             </label>
 
@@ -134,7 +105,7 @@ export default class InputEducation extends Component {
               <input
                 type='text'
                 value={input.state}
-                onChange={this.handleState}
+                onChange={this.handleInput('state')}
               />
             </label>
 
