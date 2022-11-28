@@ -54,6 +54,7 @@ export default class InputExperience extends Component {
   render() {
     const { input, editable, experience } = this.state;
     const { uuid, deleteExperience } = this.props;
+    const elementClass = 'experience-info';
 
     const label = {
       name: 'Company',
@@ -65,58 +66,64 @@ export default class InputExperience extends Component {
     };
 
     return (
-      <div>
+      <>
         {editable ? (
-          <form onSubmit={this.onSubmitExperience}>
+          <form onSubmit={this.onSubmitExperience} className={elementClass}>
             <label>
-              {label.name}
+              <p>{label.name}</p>
               <input
                 type='text'
+                placeholder={label.name}
                 value={input.name}
                 onChange={this.handleInput('name')}
               />
             </label>
 
             <label>
-              {label.position}
+              <p>{label.position}</p>
               <input
                 type='text'
+                placeholder={label.position}
                 value={input.position}
                 onChange={this.handleInput('position')}
               />
             </label>
 
             <label>
-              {label.city}
+              <p>{label.city}</p>
               <input
                 type='text'
+                placeholder={label.city}
                 value={input.city}
                 onChange={this.handleInput('city')}
               />
             </label>
 
             <label>
-              {label.state}
+              <p>{label.state}</p>
               <input
                 type='text'
+                placeholder={label.state}
                 value={input.state}
                 onChange={this.handleInput('state')}
               />
             </label>
 
             <label>
-              {label.from}
+              <p>{label.from}</p>
               <input
                 type='text'
+                placeholder={label.from}
                 value={input.from}
                 onChange={this.handleInput('from')}
               />
             </label>
 
             <label>
-              {label.until}
+              <p>{label.until}</p>
               <input
                 type='text'
+                placeholder={label.until}
                 value={input.until}
                 onChange={this.handleInput('until')}
               />
@@ -126,6 +133,7 @@ export default class InputExperience extends Component {
           </form>
         ) : (
           <DisplayExperience
+            elementClass={elementClass}
             label={label}
             experience={experience}
             editExperience={this.editExperience}
@@ -133,7 +141,7 @@ export default class InputExperience extends Component {
             uuid={uuid}
           />
         )}
-      </div>
+      </>
     );
   }
 }

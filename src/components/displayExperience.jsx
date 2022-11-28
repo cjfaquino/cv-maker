@@ -7,30 +7,42 @@ export default class DisplayExperience extends Component {
   };
 
   render() {
-    const { label, experience, editExperience } = this.props;
+    const { label, experience, editExperience, elementClass } = this.props;
     return (
-      <>
-        <div>{label.name}</div>
-        <div>{experience.name}</div>
+      <div className={elementClass}>
+        <label>
+          <p>{label.name}</p>
+          <div>{experience.name}</div>
+        </label>
 
-        <div>{label.position}</div>
-        <div>{experience.position}</div>
+        <label>
+          <p>{label.position}</p>
+          <div>{experience.position}</div>
+        </label>
 
-        <div>{label.city}</div>
-        <div>{experience.city}</div>
+        <label>
+          <p>{label.city}</p>
+          <div>{experience.city}</div>
+        </label>
 
-        <div>{label.state}</div>
-        <div>{experience.state}</div>
+        <label>
+          <p>{label.state}</p>
+          <div>{experience.state}</div>
+        </label>
 
-        <div>{label.from}</div>
-        <div>{experience.from}</div>
+        <label>
+          <p>{label.from}</p>
+          <div>{experience.from}</div>
+        </label>
 
-        <div>{label.until}</div>
-        <div>{experience.until}</div>
+        <label>
+          <p>{label.until}</p>
+          <div>{experience.until}</div>
+        </label>
 
         <button onClick={editExperience}>Edit</button>
         <button onClick={this.handleDelete}>Delete</button>
-      </>
+      </div>
     );
   }
 }

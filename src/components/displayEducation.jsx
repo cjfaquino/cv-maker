@@ -7,27 +7,37 @@ export default class DisplayEducation extends Component {
   };
 
   render() {
-    const { label, education, editEducation } = this.props;
+    const { label, education, editEducation, elementClass } = this.props;
     return (
-      <>
-        <div>{label.degree}</div>
-        <div>{education.degree}</div>
+      <div className={elementClass}>
+        <label>
+          <p>{label.degree}</p>
+          <div>{education.degree}</div>
+        </label>
 
-        <div>{label.subject}</div>
-        <div>{education.subject}</div>
+        <label>
+          <p>{label.subject}</p>
+          <div>{education.subject}</div>
+        </label>
 
-        <div>{label.name}</div>
-        <div>{education.name}</div>
+        <label>
+          <p>{label.name}</p>
+          <div>{education.name}</div>
+        </label>
 
-        <div>{label.city}</div>
-        <div>{education.city}</div>
+        <label>
+          <p>{label.city}</p>
+          <div>{education.city}</div>
+        </label>
 
-        <div>{label.state}</div>
-        <div>{education.state}</div>
+        <label>
+          <p>{label.state}</p>
+          <div>{education.state}</div>
+        </label>
 
         <button onClick={editEducation}>Edit</button>
         <button onClick={this.handleDelete}>Delete</button>
-      </>
+      </div>
     );
   }
 }

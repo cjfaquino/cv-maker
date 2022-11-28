@@ -53,35 +53,37 @@ export default class InputPersonal extends React.Component {
   render() {
     const { personal, input, editable } = this.state;
     const label = { name: 'Full name', address: 'Address', phone: 'Phone' };
+    const elementClass = 'personal-info';
+
     return (
-      <div id='personal-inputs'>
+      <>
         {editable === true ? (
-          <form onSubmit={this.onSubmitPersonal}>
-            <label htmlFor='input-full-name'>
-              {label.name}
+          <form onSubmit={this.onSubmitPersonal} className={elementClass}>
+            <label>
+              <p>{label.name}</p>
               <input
                 type='text'
-                id='input-full-name'
+                placeholder={label.name}
                 value={input.name}
                 onChange={this.handleName}
                 required
               />
             </label>
-            <label htmlFor='input-address'>
-              {label.address}
+            <label>
+              <p>{label.address}</p>
               <input
                 type='text'
-                id='input-address'
+                placeholder={label.address}
                 value={input.address}
                 onChange={this.handleAddress}
                 required
               />
             </label>
-            <label htmlFor='input-phone'>
-              {label.phone}
+            <label>
+              <p>{label.phone}</p>
               <input
                 type='text'
-                id='input-phone'
+                placeholder={label.phone}
                 value={input.phone}
                 onChange={this.handlePhone}
                 required
@@ -91,13 +93,13 @@ export default class InputPersonal extends React.Component {
           </form>
         ) : (
           <DisplayPersonal
-            id='personal-inputs'
+            elementClass={elementClass}
             label={label}
             personal={personal}
             editPersonal={this.editPersonal}
           />
         )}
-      </div>
+      </>
     );
   }
 }

@@ -52,6 +52,7 @@ export default class InputEducation extends Component {
   render() {
     const { editable, education, input } = this.state;
     const { uuid, deleteEducation } = this.props;
+    const elementClass = 'education-info';
 
     const label = {
       name: 'College',
@@ -61,49 +62,54 @@ export default class InputEducation extends Component {
       subject: 'Subject',
     };
     return (
-      <div id='education-inputs'>
+      <>
         {editable ? (
-          <form onSubmit={this.onSubmitEducation}>
+          <form onSubmit={this.onSubmitEducation} className={elementClass}>
             <label>
-              {label.degree}
+              <p>{label.degree}</p>
               <input
                 type='text'
+                placeholder={label.degree}
                 value={input.degree}
                 onChange={this.handleInput('degree')}
               />
             </label>
 
             <label>
-              {label.subject}
+              <p>{label.subject}</p>
               <input
                 type='text'
+                placeholder={label.subject}
                 value={input.subject}
                 onChange={this.handleInput('subject')}
               />
             </label>
 
             <label>
-              {label.name}
+              <p>{label.name}</p>
               <input
                 type='text'
+                placeholder={label.name}
                 value={input.name}
                 onChange={this.handleInput('name')}
               />
             </label>
 
             <label>
-              {label.city}
+              <p>{label.city}</p>
               <input
                 type='text'
+                placeholder={label.city}
                 value={input.city}
                 onChange={this.handleInput('city')}
               />
             </label>
 
             <label>
-              {label.state}
+              <p>{label.state}</p>
               <input
                 type='text'
+                placeholder={label.state}
                 value={input.state}
                 onChange={this.handleInput('state')}
               />
@@ -113,6 +119,7 @@ export default class InputEducation extends Component {
           </form>
         ) : (
           <DisplayEducation
+            elementClass={elementClass}
             label={label}
             education={education}
             editEducation={this.editEducation}
@@ -120,7 +127,7 @@ export default class InputEducation extends Component {
             uuid={uuid}
           />
         )}
-      </div>
+      </>
     );
   }
 }

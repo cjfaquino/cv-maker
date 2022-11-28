@@ -2,22 +2,29 @@ import React from 'react';
 
 export default class DisplayPersonal extends React.PureComponent {
   render() {
-    const { personal, editPersonal, label } = this.props;
+    const { personal, editPersonal, label, elementClass, fieldClasses } =
+      this.props;
     return (
-      <>
-        <div className='label-name'>{label.name}</div>
-        <div>{personal.name}</div>
+      <div className={elementClass}>
+        <label>
+          <p>{label.name}</p>
+          <div>{personal.name}</div>
+        </label>
 
-        <div className='label-address'>{label.address}</div>
-        <div>{personal.address}</div>
+        <label>
+          <p>{label.address}</p>
+          <div>{personal.address}</div>
+        </label>
 
-        <div className='label-phone'>{label.phone}</div>
-        <div>{personal.phone}</div>
+        <label>
+          <p>{label.phone}</p>
+          <div>{personal.phone}</div>
+        </label>
 
         <button type='button' onClick={editPersonal}>
           Edit
         </button>
-      </>
+      </div>
     );
   }
 }
