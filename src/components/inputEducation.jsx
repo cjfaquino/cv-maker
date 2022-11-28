@@ -80,6 +80,7 @@ export default class InputEducation extends Component {
 
   render() {
     const { editable, education, input } = this.state;
+    const { id, deleteEducation } = this.props;
 
     const label = {
       name: 'College',
@@ -144,6 +145,8 @@ export default class InputEducation extends Component {
             label={label}
             education={education}
             editEducation={this.editEducation}
+            deleteEducation={deleteEducation}
+            id={id}
           />
         )}
       </div>

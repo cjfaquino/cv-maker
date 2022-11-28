@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
 export default class DisplayEducation extends Component {
+  handleDelete = () => {
+    const { id, deleteEducation } = this.props;
+    deleteEducation(id);
+  };
+
   render() {
     const { label, education, editEducation } = this.props;
     return (
@@ -21,6 +26,7 @@ export default class DisplayEducation extends Component {
         <div>{education.state}</div>
 
         <button onClick={editEducation}>Edit</button>
+        <button onClick={this.handleDelete}>Delete</button>
       </>
     );
   }

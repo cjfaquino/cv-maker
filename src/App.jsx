@@ -9,22 +9,60 @@ import InputExperience from './components/InputExperience';
 export default class App extends React.PureComponent {
   constructor() {
     super();
+    const expKey = uuidv4();
+    const eduKey = uuidv4();
     this.state = {
-      expArr: [<InputExperience key={uuidv4()} />],
-      eduArr: [<InputEducation key={uuidv4()} />],
+      expArr: [
+        <InputExperience
+          key={expKey}
+          id={expKey}
+          deleteExperience={this.deleteExp}
+        />,
+      ],
+      eduArr: [
+        <InputEducation
+          key={eduKey}
+          id={eduKey}
+          deleteEducation={this.deleteEdu}
+        />,
+      ],
     };
   }
 
   addExp = () => {
+    const expKey = uuidv4();
     this.setState({
-      expArr: this.state.expArr.concat(<InputExperience key={uuidv4()} />),
+      expArr: this.state.expArr.concat(
+        <InputExperience
+          key={expKey}
+          id={expKey}
+          deleteExperience={this.deleteExp}
+        />
+      ),
     });
   };
 
+  deleteExp = (id) => {
+    const filtered = this.state.expArr.filter((el) => el.props.id !== id);
+    this.setState({ expArr: filtered });
+  };
+
   addEdu = () => {
+    const eduKey = uuidv4();
     this.setState({
-      eduArr: this.state.eduArr.concat(<InputEducation key={uuidv4()} />),
+      eduArr: this.state.eduArr.concat(
+        <InputEducation
+          key={eduKey}
+          id={eduKey}
+          deleteEducation={this.deleteEdu}
+        />
+      ),
     });
+  };
+
+  deleteEdu = (id) => {
+    const filtered = this.state.eduArr.filter((el) => el.props.id !== id);
+    this.setState({ eduArr: filtered });
   };
 
   render() {

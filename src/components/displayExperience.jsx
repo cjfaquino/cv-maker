@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
 export default class DisplayExperience extends Component {
+  handleDelete = () => {
+    const { id, deleteExperience } = this.props;
+    deleteExperience(id);
+  };
+
   render() {
     const { label, experience, editExperience } = this.props;
     return (
@@ -24,6 +29,7 @@ export default class DisplayExperience extends Component {
         <div>{experience.until}</div>
 
         <button onClick={editExperience}>Edit</button>
+        <button onClick={this.handleDelete}>Delete</button>
       </>
     );
   }
