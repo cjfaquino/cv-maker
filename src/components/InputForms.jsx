@@ -6,21 +6,14 @@ import React from 'react';
 import InputPersonal from './InputPersonal';
 import InputEducation from './InputEducation';
 import InputExperience from './InputExperience';
+import Experience from './Experience';
 
-export default class InputForms extends React.PureComponent {
+export default class InputForms extends React.Component {
   constructor() {
     super();
-    const expKey = uuidv4();
     const eduKey = uuidv4();
     this.state = {
-      expArr: [
-        <InputExperience
-          key={expKey}
-          uuid={expKey}
-          class={'test'}
-          deleteExperience={this.deleteExp}
-        />,
-      ],
+      expArr: [new Experience()],
       eduArr: [
         <InputEducation
           key={eduKey}
@@ -31,22 +24,31 @@ export default class InputForms extends React.PureComponent {
     };
   }
 
+  handleInput = (type, uuid) => (e) => {
+    let obj = {};
+    obj[type] = e.target.value;
+
+    const newArr = this.state.expArr.map((exp) => {
+      if (exp.uuid === uuid) return Object.assign(exp, obj);
+      return exp;
+    });
+    this.setState({ expArr: newArr });
+    console.log(this.state);
+  };
+
   addExp = () => {
-    const expKey = uuidv4();
     this.setState({
-      expArr: this.state.expArr.concat(
-        <InputExperience
-          key={expKey}
-          uuid={expKey}
-          deleteExperience={this.deleteExp}
-        />
-      ),
+      expArr: this.state.expArr.concat(new Experience()),
     });
   };
 
   deleteExp = (uuid) => {
-    const filtered = this.state.expArr.filter((el) => el.props.uuid !== uuid);
-    this.setState({ expArr: filtered });
+    const { expArr } = this.state;
+    const index = expArr.findIndex((exp) => exp.uuid === uuid);
+    const newArr = expArr.slice();
+    newArr.splice(index, 1);
+
+    this.setState({ expArr: newArr });
   };
 
   addEdu = () => {
@@ -68,14 +70,23 @@ export default class InputForms extends React.PureComponent {
   };
 
   render() {
-    const { expArr, eduArr } = this.state;
+    const { expArr, eduArr, testArr } = this.state;
+
     return (
       <div className='forms'>
         <h3>Personal Information</h3>
         <InputPersonal />
 
         <h3>Experience</h3>
-        {expArr.map((exp) => exp)}
+        {expArr.map((test) => (
+          <InputExperience
+            key={test.uuid}
+            handleInput={this.handleInput}
+            deleteExp={this.deleteExp}
+            exp={test}
+          />
+        ))}
+        {/* {expArr.map((exp) => exp)} */}
         <button onClick={this.addExp}>Add more</button>
 
         <h3>Education</h3>
