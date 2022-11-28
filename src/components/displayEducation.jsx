@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 export default class DisplayEducation extends Component {
   handleDelete = () => {
-    const { id, deleteEducation } = this.props;
-    deleteEducation(id);
+    const { uuid, deleteEducation } = this.props;
+    deleteEducation(uuid);
   };
 
   render() {

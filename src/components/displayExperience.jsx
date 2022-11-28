@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 export default class DisplayExperience extends Component {
   handleDelete = () => {
-    const { id, deleteExperience } = this.props;
-    deleteExperience(id);
+    const { uuid, deleteExperience } = this.props;
+    deleteExperience(uuid);
   };
 
   render() {

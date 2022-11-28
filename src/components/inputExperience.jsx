@@ -53,7 +53,7 @@ export default class InputExperience extends Component {
 
   render() {
     const { input, editable, experience } = this.state;
-    const { id, deleteExperience } = this.props;
+    const { uuid, deleteExperience } = this.props;
 
     const label = {
       name: 'Company',
@@ -130,7 +130,7 @@ export default class InputExperience extends Component {
             experience={experience}
             editExperience={this.editExperience}
             deleteExperience={deleteExperience}
-            id={id}
+            uuid={uuid}
           />
         )}
       </div>

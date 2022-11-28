@@ -15,14 +15,15 @@ export default class App extends React.PureComponent {
       expArr: [
         <InputExperience
           key={expKey}
-          id={expKey}
+          uuid={expKey}
+          class={'test'}
           deleteExperience={this.deleteExp}
         />,
       ],
       eduArr: [
         <InputEducation
           key={eduKey}
-          id={eduKey}
+          uuid={eduKey}
           deleteEducation={this.deleteEdu}
         />,
       ],
@@ -35,15 +36,15 @@ export default class App extends React.PureComponent {
       expArr: this.state.expArr.concat(
         <InputExperience
           key={expKey}
-          id={expKey}
+          uuid={expKey}
           deleteExperience={this.deleteExp}
         />
       ),
     });
   };
 
-  deleteExp = (id) => {
-    const filtered = this.state.expArr.filter((el) => el.props.id !== id);
+  deleteExp = (uuid) => {
+    const filtered = this.state.expArr.filter((el) => el.props.uuid !== uuid);
     this.setState({ expArr: filtered });
   };
 
@@ -53,15 +54,15 @@ export default class App extends React.PureComponent {
       eduArr: this.state.eduArr.concat(
         <InputEducation
           key={eduKey}
-          id={eduKey}
+          uuid={eduKey}
           deleteEducation={this.deleteEdu}
         />
       ),
     });
   };
 
-  deleteEdu = (id) => {
-    const filtered = this.state.eduArr.filter((el) => el.props.id !== id);
+  deleteEdu = (uuid) => {
+    const filtered = this.state.eduArr.filter((el) => el.props.uuid !== uuid);
     this.setState({ eduArr: filtered });
   };
 
