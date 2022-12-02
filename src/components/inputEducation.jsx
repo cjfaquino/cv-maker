@@ -50,25 +50,26 @@ export default class InputEducation extends Component {
           />
         </label>
 
-        <label>
-          <p>{label.city}</p>
-          <input
-            type='text'
-            placeholder={label.city}
-            value={edu.city}
-            onChange={handleInput('city', edu.uuid, objName)}
-          />
-        </label>
-
-        <label>
-          <p>{label.state}</p>
-          <input
-            type='text'
-            placeholder={label.state}
-            value={edu.state}
-            onChange={handleInput('state', edu.uuid, objName)}
-          />
-        </label>
+        <div className='input-education-location'>
+          <label>
+            <p>{label.city}</p>
+            <input
+              type='text'
+              placeholder={label.city}
+              value={edu.city}
+              onChange={handleInput('city', edu.uuid, objName)}
+            />
+          </label>
+          <label>
+            <p>{label.state}</p>
+            <input
+              type='text'
+              placeholder={label.state}
+              value={edu.state}
+              onChange={handleInput('state', edu.uuid, objName)}
+            />
+          </label>
+        </div>
 
         <button type='button' onClick={this.handleDelete}>
           Delete

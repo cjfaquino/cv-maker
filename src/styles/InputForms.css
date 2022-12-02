@@ -53,6 +53,13 @@ label textarea {
   width: 600px;
 }
 
+.input-experience-dates,
+.input-experience-location,
+.input-education-location {
+  display: flex;
+  gap: 10px;
+}
+
 #overview {
   width: 100%;
   padding: 20px;
