@@ -15,7 +15,6 @@ export default class InputForms extends React.Component {
       personal: {
         firstName: '',
         lastName: '',
-        title: '',
         email: '',
         address: '',
         phone: '',

@@ -6,7 +6,6 @@ export default class InputPersonal extends React.Component {
     const label = {
       firstName: 'First name',
       lastName: 'Last name',
-      title: 'Title',
       email: 'Email',
       address: 'Address',
       phone: 'Phone',
@@ -32,15 +31,6 @@ export default class InputPersonal extends React.Component {
             placeholder={label.lastName}
             value={personal.lastName}
             onChange={handleInput('lastName')}
-          />
-        </label>
-        <label>
-          <p>{label.title}</p>
-          <input
-            type='text'
-            placeholder={label.title}
-            value={personal.title}
-            onChange={handleInput('title')}
           />
         </label>
         <label>
