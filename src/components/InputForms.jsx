@@ -13,6 +13,7 @@ export default class InputForms extends React.Component {
   constructor() {
     super();
     this.state = {
+      personal: { name: '', address: '', phone: '' },
       expArr: [new Experience()],
       eduArr: [new Education()],
     };
@@ -39,6 +40,15 @@ export default class InputForms extends React.Component {
       return exp;
     });
     this.setState({ eduArr: newArr });
+    console.log(this.state);
+  };
+
+  handlePersonal = (type) => (e) => {
+    const { personal } = this.state;
+    let obj = {};
+    obj[type] = e.target.value;
+
+    this.setState({ personal: Object.assign(personal, obj) });
     console.log(this.state);
   };
 
@@ -73,12 +83,12 @@ export default class InputForms extends React.Component {
   };
 
   render() {
-    const { expArr, eduArr } = this.state;
+    const { personal, expArr, eduArr } = this.state;
 
     return (
       <div className='forms'>
         <h3>Personal Information</h3>
-        <InputPersonal />
+        <InputPersonal personal={personal} handleInput={this.handlePersonal} />
 
         <h3>Experience</h3>
         {expArr.map((test) => (
