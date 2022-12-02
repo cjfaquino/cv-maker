@@ -7,7 +7,7 @@ export default class InputExperience extends Component {
   };
 
   render() {
-    const { handleInput, exp, deleteExp } = this.props;
+    const { handleInput, exp, objName } = this.props;
     const elementClass = 'experience-info';
 
     const label = {
@@ -28,7 +28,7 @@ export default class InputExperience extends Component {
               type='text'
               placeholder={label.name}
               value={exp.name}
-              onChange={handleInput('name', exp.uuid)}
+              onChange={handleInput('name', exp.uuid, objName)}
             />
           </label>
 
@@ -38,7 +38,7 @@ export default class InputExperience extends Component {
               type='text'
               placeholder={label.position}
               value={exp.position}
-              onChange={handleInput('position', exp.uuid)}
+              onChange={handleInput('position', exp.uuid, objName)}
             />
           </label>
 
@@ -48,7 +48,7 @@ export default class InputExperience extends Component {
               type='text'
               placeholder={label.city}
               value={exp.city}
-              onChange={handleInput('city', exp.uuid)}
+              onChange={handleInput('city', exp.uuid, objName)}
             />
           </label>
 
@@ -58,7 +58,7 @@ export default class InputExperience extends Component {
               type='text'
               placeholder={label.state}
               value={exp.state}
-              onChange={handleInput('state', exp.uuid)}
+              onChange={handleInput('state', exp.uuid, objName)}
             />
           </label>
 
@@ -68,7 +68,7 @@ export default class InputExperience extends Component {
               type='text'
               placeholder={label.from}
               value={exp.from}
-              onChange={handleInput('from', exp.uuid)}
+              onChange={handleInput('from', exp.uuid, objName)}
             />
           </label>
 
@@ -78,7 +78,7 @@ export default class InputExperience extends Component {
               type='text'
               placeholder={label.until}
               value={exp.until}
-              onChange={handleInput('until', exp.uuid)}
+              onChange={handleInput('until', exp.uuid, objName)}
             />
           </label>
 

@@ -14,32 +14,36 @@ export default class InputForms extends React.Component {
     super();
     this.state = {
       personal: { name: '', address: '', phone: '' },
-      expArr: [new Experience()],
-      eduArr: [new Education()],
+      experience: { name: 'experience', array: [new Experience()] },
+      education: { name: 'education', array: [new Education()] },
     };
   }
 
-  handleInput = (type, uuid) => (e) => {
+  handleInput = (type, uuid, arrayName) => (e) => {
     let obj = {};
     obj[type] = e.target.value;
+    let array = [];
+    if (arrayName === 'experience') {
+      array = this.state.experience.array.slice();
+    } else if (arrayName === 'education') {
+      array = this.state.education.array.slice();
+    }
 
-    const newArr = this.state.expArr.map((exp) => {
-      if (exp.uuid === uuid) return Object.assign(exp, obj);
-      return exp;
+    const newArr = array.map((item) => {
+      if (item.uuid === uuid) return Object.assign(item, obj);
     });
-    this.setState({ expArr: newArr });
-    console.log(this.state);
-  };
 
-  handleEdu = (type, uuid) => (e) => {
-    let obj = {};
-    obj[type] = e.target.value;
+    let stateObj = {};
+    stateObj['array'] = newArr;
 
-    const newArr = this.state.eduArr.map((exp) => {
-      if (exp.uuid === uuid) return Object.assign(exp, obj);
-      return exp;
+    this.setState(() => {
+      if (arrayName === 'experience') {
+        return { experience: Object.assign(this.state.experience, stateObj) };
+      } else if (arrayName === 'education') {
+        return { education: Object.assign(this.state.education, stateObj) };
+      }
     });
-    this.setState({ eduArr: newArr });
+
     console.log(this.state);
   };
 
@@ -83,7 +87,9 @@ export default class InputForms extends React.Component {
   };
 
   render() {
-    const { personal, expArr, eduArr } = this.state;
+    const { personal, experience, education } = this.state;
+    const { array: expArr, name: expObjName } = experience;
+    const { array: eduArr, name: eduObjName } = education;
 
     return (
       <div className='forms'>
@@ -96,6 +102,7 @@ export default class InputForms extends React.Component {
             key={test.uuid}
             handleInput={this.handleInput}
             deleteExp={this.deleteExp}
+            objName={expObjName}
             exp={test}
           />
         ))}
@@ -106,8 +113,9 @@ export default class InputForms extends React.Component {
         {eduArr.map((edu) => (
           <InputEducation
             key={edu.uuid}
-            handleInput={this.handleEdu}
+            handleInput={this.handleInput}
             deleteEdu={this.deleteEdu}
+            objName={eduObjName}
             edu={edu}
           />
         ))}

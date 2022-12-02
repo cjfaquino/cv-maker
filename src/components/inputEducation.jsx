@@ -7,7 +7,8 @@ export default class InputEducation extends Component {
   };
 
   render() {
-    const { handleInput, edu } = this.props;
+    const { handleInput, edu, objName } = this.props;
+
     const elementClass = 'education-info';
 
     const label = {
@@ -26,7 +27,7 @@ export default class InputEducation extends Component {
               type='text'
               placeholder={label.degree}
               value={edu.degree}
-              onChange={handleInput('degree', edu.uuid)}
+              onChange={handleInput('degree', edu.uuid, objName)}
             />
           </label>
 
@@ -36,7 +37,7 @@ export default class InputEducation extends Component {
               type='text'
               placeholder={label.subject}
               value={edu.subject}
-              onChange={handleInput('subject', edu.uuid)}
+              onChange={handleInput('subject', edu.uuid, objName)}
             />
           </label>
 
@@ -46,7 +47,7 @@ export default class InputEducation extends Component {
               type='text'
               placeholder={label.name}
               value={edu.name}
-              onChange={handleInput('name', edu.uuid)}
+              onChange={handleInput('name', edu.uuid, objName)}
             />
           </label>
 
@@ -56,7 +57,7 @@ export default class InputEducation extends Component {
               type='text'
               placeholder={label.city}
               value={edu.city}
-              onChange={handleInput('city', edu.uuid)}
+              onChange={handleInput('city', edu.uuid, objName)}
             />
           </label>
 
@@ -66,7 +67,7 @@ export default class InputEducation extends Component {
               type='text'
               placeholder={label.state}
               value={edu.state}
-              onChange={handleInput('state', edu.uuid)}
+              onChange={handleInput('state', edu.uuid, objName)}
             />
           </label>
 
