@@ -79,12 +79,17 @@ label textarea {
 }
 
 .overview-name {
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 700;
 }
 
-.overview-contact {
+.overview-card {
   font-size: 0.8rem;
+}
+
+.overview-contact {
+  display: flex;
+  gap: 20px;
 }
 
 .overview-lines {
@@ -93,6 +98,7 @@ label textarea {
   border: 1px solid black;
 }
 
+.overview-desc-label,
 .overview-exp,
 .overview-edu {
   margin: 0 0 10px 0;
