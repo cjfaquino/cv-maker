@@ -9,7 +9,7 @@ export default class InputPersonal extends React.Component {
       email: 'Email',
       address: 'Address',
       phone: 'Phone',
-      description: 'Description',
+      summary: 'Summary',
     };
     const elementClass = 'personal-info';
 
@@ -61,12 +61,12 @@ export default class InputPersonal extends React.Component {
           />
         </label>
         <label>
-          <p>{label.description}</p>
+          <p>{label.summary}</p>
           <textarea
             type='text'
-            placeholder={label.description}
-            value={personal.description}
-            onChange={handleInput('description')}
+            placeholder={label.summary}
+            value={personal.summary}
+            onChange={handleInput('summary')}
           />
         </label>
       </form>

@@ -19,11 +19,11 @@ export default class Overview extends Component {
           </div>
         </div>
 
-        {personal.description !== '' ? (
+        {personal.summary !== '' ? (
           <div>
             <hr className='overview-lines' />
-            <h3 className='overview-desc-label'>Description</h3>
-            <div className='overview-description'>{personal.description}</div>
+            <h3 className='overview-desc-label'>Summary</h3>
+            <div className='overview-summary'>{personal.summary}</div>
           </div>
         ) : null}
 
