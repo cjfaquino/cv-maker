@@ -32,14 +32,85 @@ label input {
   padding: 5px 10px;
 }
 
-.forms {
+.wrapper {
+  width: 1500px;
+}
+
+#display {
+  display: flex;
+}
+
+#forms {
   margin: 0;
   padding: 10px;
   background-color: rgb(240, 240, 240);
+  width: 600px;
+}
+
+#overview {
+  width: 100%;
+  padding: 20px;
 }
 
 .experience-info,
 .education-info,
 .personal-info {
   margin-top: 20px;
+}
+
+.overview-personal {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 20px;
+}
+
+.overview-name {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.overview-contact {
+  font-size: 0.8rem;
+}
+
+.overview-lines {
+  position: relative;
+  top: 2px;
+  border: 1px solid black;
+}
+
+.overview-exp,
+.overview-edu {
+  margin: 0 0 10px 0;
+  background-color: black;
+  color: white;
+  width: fit-content;
+  padding: 5px;
+}
+
+.experience-item {
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-areas:
+    'dates position'
+    'dates location';
+}
+
+.experience-position {
+  font-weight: 600;
+  grid-area: position;
+}
+
+.experience-dates {
+  grid-area: dates;
+}
+
+.education-name {
+  font-weight: 600;
+}
+
+.education-location {
+  font-weight: 400;
 }

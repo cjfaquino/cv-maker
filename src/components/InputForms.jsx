@@ -6,6 +6,7 @@ import InputEducation from './InputEducation';
 import InputExperience from './InputExperience';
 import Experience from './Experience';
 import Education from './Education';
+import Overview from './Overview';
 
 export default class InputForms extends React.Component {
   constructor() {
@@ -100,39 +101,42 @@ export default class InputForms extends React.Component {
     const { array: eduArr, name: eduObjName } = education;
 
     return (
-      <div className='forms'>
-        <h3>Personal Information</h3>
-        <InputPersonal personal={personal} handleInput={this.handleInput} />
+      <div id='display' className='wrapper'>
+        <div id='forms'>
+          <h3>Personal Information</h3>
+          <InputPersonal personal={personal} handleInput={this.handleInput} />
 
-        <h3>Experience</h3>
-        {expArr.map((test) => (
-          <InputExperience
-            key={test.uuid}
-            handleInput={this.handleInput}
-            deleteItem={this.deleteItem}
-            objName={expObjName}
-            exp={test}
-          />
-        ))}
-        {/* {expArr.map((exp) => exp)} */}
-        <button type='button' onClick={this.addExtra('experience')}>
-          Add more
-        </button>
+          <h3>Experience</h3>
+          {expArr.map((test) => (
+            <InputExperience
+              key={test.uuid}
+              handleInput={this.handleInput}
+              deleteItem={this.deleteItem}
+              objName={expObjName}
+              exp={test}
+            />
+          ))}
+          {/* {expArr.map((exp) => exp)} */}
+          <button type='button' onClick={this.addExtra('experience')}>
+            Add more
+          </button>
 
-        <h3>Education</h3>
-        {eduArr.map((edu) => (
-          <InputEducation
-            key={edu.uuid}
-            handleInput={this.handleInput}
-            deleteItem={this.deleteItem}
-            objName={eduObjName}
-            edu={edu}
-          />
-        ))}
-        {/* {eduArr.map((edu) => edu)} */}
-        <button type='button' onClick={this.addExtra('education')}>
-          Add more
-        </button>
+          <h3>Education</h3>
+          {eduArr.map((edu) => (
+            <InputEducation
+              key={edu.uuid}
+              handleInput={this.handleInput}
+              deleteItem={this.deleteItem}
+              objName={eduObjName}
+              edu={edu}
+            />
+          ))}
+          {/* {eduArr.map((edu) => edu)} */}
+          <button type='button' onClick={this.addExtra('education')}>
+            Add more
+          </button>
+        </div>
+        <Overview object={this.state} />
       </div>
     );
   }
