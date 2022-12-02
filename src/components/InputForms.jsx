@@ -12,7 +12,15 @@ export default class InputForms extends React.Component {
   constructor() {
     super();
     this.state = {
-      personal: { name: '', address: '', phone: '' },
+      personal: {
+        firstName: '',
+        lastName: '',
+        title: '',
+        email: '',
+        address: '',
+        phone: '',
+        description: '',
+      },
       experience: { name: 'experience', array: [new Experience()] },
       education: { name: 'education', array: [new Education()] },
     };

@@ -19,7 +19,8 @@ label > p {
 }
 
 label div,
-label input {
+label input,
+label textarea {
   height: 30px;
   width: 100%;
   font-size: 1rem;
@@ -30,6 +31,11 @@ label input {
   border: none;
   margin-bottom: 5px;
   padding: 5px 10px;
+}
+
+label textarea {
+  resize: none;
+  height: 150px;
 }
 
 .wrapper {

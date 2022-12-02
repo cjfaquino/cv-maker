@@ -3,19 +3,44 @@ import React from 'react';
 export default class InputPersonal extends React.Component {
   render() {
     const { personal, handleInput } = this.props;
-    const label = { name: 'Full name', address: 'Address', phone: 'Phone' };
+    const label = {
+      firstName: 'First name',
+      lastName: 'Last name',
+      title: 'Title',
+      email: 'Email',
+      address: 'Address',
+      phone: 'Phone',
+      description: 'Description',
+    };
     const elementClass = 'personal-info';
 
     return (
       <form className={elementClass}>
         <label>
-          <p>{label.name}</p>
+          <p>{label.firstName}</p>
           <input
             type='text'
-            placeholder={label.name}
-            value={personal.name}
-            onChange={handleInput('name')}
-            required
+            placeholder={label.firstName}
+            value={personal.firstName}
+            onChange={handleInput('firstName')}
+          />
+        </label>
+        <label>
+          <p>{label.lastName}</p>
+          <input
+            type='text'
+            placeholder={label.lastName}
+            value={personal.lastName}
+            onChange={handleInput('lastName')}
+          />
+        </label>
+        <label>
+          <p>{label.title}</p>
+          <input
+            type='text'
+            placeholder={label.title}
+            value={personal.title}
+            onChange={handleInput('title')}
           />
         </label>
         <label>
@@ -25,7 +50,6 @@ export default class InputPersonal extends React.Component {
             placeholder={label.address}
             value={personal.address}
             onChange={handleInput('address')}
-            required
           />
         </label>
         <label>
@@ -35,7 +59,24 @@ export default class InputPersonal extends React.Component {
             placeholder={label.phone}
             value={personal.phone}
             onChange={handleInput('phone')}
-            required
+          />
+        </label>
+        <label>
+          <p>{label.email}</p>
+          <input
+            type='email'
+            placeholder={label.email}
+            value={personal.email}
+            onChange={handleInput('email')}
+          />
+        </label>
+        <label>
+          <p>{label.description}</p>
+          <textarea
+            type='text'
+            placeholder={label.description}
+            value={personal.description}
+            onChange={handleInput('description')}
           />
         </label>
       </form>
