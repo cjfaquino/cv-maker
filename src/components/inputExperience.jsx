@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 export default class InputExperience extends Component {
   handleDelete = () => {
-    const { exp, deleteExp } = this.props;
-    deleteExp(exp.uuid);
+    const { exp, deleteItem, objName } = this.props;
+    deleteItem(exp.uuid, objName);
+    console.log(exp.uuid);
   };
 
   render() {

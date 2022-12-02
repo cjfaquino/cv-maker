@@ -81,22 +81,31 @@ export default class InputForms extends React.Component {
     });
   };
 
-  deleteExp = (uuid) => {
-    const { expArr } = this.state;
-    const index = expArr.findIndex((exp) => exp.uuid === uuid);
-    const newArr = expArr.slice();
+  deleteItem = (uuid, objName) => {
+    const { experience, education } = this.state;
+
+    let index = null;
+    let newArr = [];
+
+    if (objName === 'experience') {
+      index = experience.array.findIndex((exp) => exp.uuid === uuid);
+      newArr = experience.array.slice();
+    } else if (objName === 'education') {
+      index = education.array.findIndex((edu) => edu.uuid === uuid);
+      newArr = education.array.slice();
+    }
     newArr.splice(index, 1);
+    const obj = { array: newArr };
 
-    this.setState({ expArr: newArr });
-  };
+    this.setState(() => {
+      if (objName === 'experience') {
+        return { experience: Object.assign(experience, obj) };
+      }
 
-  deleteEdu = (uuid) => {
-    const { eduArr } = this.state;
-    const index = eduArr.findIndex((exp) => exp.uuid === uuid);
-    const newArr = eduArr.slice();
-    newArr.splice(index, 1);
-
-    this.setState({ eduArr: newArr });
+      if (objName === 'education') {
+        return { education: Object.assign(education, obj) };
+      }
+    });
   };
 
   render() {
@@ -114,7 +123,7 @@ export default class InputForms extends React.Component {
           <InputExperience
             key={test.uuid}
             handleInput={this.handleInput}
-            deleteExp={this.deleteExp}
+            deleteItem={this.deleteItem}
             objName={expObjName}
             exp={test}
           />
@@ -127,7 +136,7 @@ export default class InputForms extends React.Component {
           <InputEducation
             key={edu.uuid}
             handleInput={this.handleInput}
-            deleteEdu={this.deleteEdu}
+            deleteItem={this.deleteItem}
             objName={eduObjName}
             edu={edu}
           />
