@@ -3,7 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "prettier"],
+  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -11,6 +11,8 @@
   },
   "plugins": ["react"],
   "rules": {
-    "react/prop-types": ["off"]
+    "react/prop-types": ["off"],
+    "react/prefer-stateless-function": ["off"],
+    "jsx-a11y/label-has-associated-control": ["off"]
   }
 }

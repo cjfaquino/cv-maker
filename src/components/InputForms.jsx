@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 import '../styles/InputForms.css';
 
 import React from 'react';
@@ -23,14 +21,16 @@ export default class InputForms extends React.Component {
     const { experience, education } = this.state;
     if (objName === 'experience') {
       return { experience: Object.assign(experience, change) };
-    } else if (objName === 'education') {
+    }
+    if (objName === 'education') {
       return { education: Object.assign(education, change) };
     }
+    throw Error('Could not catch objName');
   };
 
   handleInput = (type, uuid, objName) => (e) => {
     const { personal, experience, education } = this.state;
-    let obj = {};
+    const obj = {};
     obj[type] = e.target.value;
 
     // if updating personal
@@ -51,7 +51,7 @@ export default class InputForms extends React.Component {
       return item;
     });
 
-    let stateObj = { array: newArr };
+    const stateObj = { array: newArr };
 
     return this.setState(this.#updateStates(objName, stateObj));
   };
@@ -67,6 +67,8 @@ export default class InputForms extends React.Component {
         if (objName === 'education') {
           return education.array.concat(new Education());
         }
+
+        throw Error('Could not catch objName');
       })(),
     };
 
@@ -113,7 +115,9 @@ export default class InputForms extends React.Component {
           />
         ))}
         {/* {expArr.map((exp) => exp)} */}
-        <button onClick={this.addExtra('experience')}>Add more</button>
+        <button type='button' onClick={this.addExtra('experience')}>
+          Add more
+        </button>
 
         <h3>Education</h3>
         {eduArr.map((edu) => (
@@ -126,7 +130,9 @@ export default class InputForms extends React.Component {
           />
         ))}
         {/* {eduArr.map((edu) => edu)} */}
-        <button onClick={this.addExtra('education')}>Add more</button>
+        <button type='button' onClick={this.addExtra('education')}>
+          Add more
+        </button>
       </div>
     );
   }

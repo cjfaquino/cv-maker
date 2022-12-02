@@ -5,10 +5,6 @@ import InputForms from './components/InputForms';
 
 export default class App extends React.PureComponent {
   render() {
-    return (
-      <>
-        <InputForms />
-      </>
-    );
+    return <InputForms />;
   }
 }
