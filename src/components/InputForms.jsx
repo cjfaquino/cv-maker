@@ -19,13 +19,22 @@ export default class InputForms extends React.Component {
     };
   }
 
-  handleInput = (type, uuid, arrayName) => (e) => {
+  #updateStates = (objName, change) => {
+    const { experience, education } = this.state;
+    if (objName === 'experience') {
+      return { experience: Object.assign(experience, change) };
+    } else if (objName === 'education') {
+      return { education: Object.assign(education, change) };
+    }
+  };
+
+  handleInput = (type, uuid, objName) => (e) => {
     let obj = {};
     obj[type] = e.target.value;
     let array = [];
-    if (arrayName === 'experience') {
+    if (objName === 'experience') {
       array = this.state.experience.array.slice();
-    } else if (arrayName === 'education') {
+    } else if (objName === 'education') {
       array = this.state.education.array.slice();
     }
 
@@ -34,16 +43,9 @@ export default class InputForms extends React.Component {
       return item;
     });
 
-    let stateObj = {};
-    stateObj['array'] = newArr;
+    let stateObj = { array: newArr };
 
-    this.setState(() => {
-      if (arrayName === 'experience') {
-        return { experience: Object.assign(this.state.experience, stateObj) };
-      } else if (arrayName === 'education') {
-        return { education: Object.assign(this.state.education, stateObj) };
-      }
-    });
+    this.setState(this.#updateStates(objName, stateObj));
 
     console.log(this.state);
   };
@@ -54,31 +56,23 @@ export default class InputForms extends React.Component {
     obj[type] = e.target.value;
 
     this.setState({ personal: Object.assign(personal, obj) });
-    console.log(this.state);
   };
 
   addExtra = (objName) => () => {
     const { experience, education } = this.state;
-    let obj = {};
-    obj.array = (() => {
-      if (objName === 'experience') {
-        return experience.array.concat(new Experience());
-      }
+    const obj = {
+      array: (() => {
+        if (objName === 'experience') {
+          return experience.array.concat(new Experience());
+        }
 
-      if (objName === 'education') {
-        return education.array.concat(new Education());
-      }
-    })();
+        if (objName === 'education') {
+          return education.array.concat(new Education());
+        }
+      })(),
+    };
 
-    this.setState(() => {
-      if (objName === 'experience') {
-        return { experience: Object.assign(experience, obj) };
-      }
-
-      if (objName === 'education') {
-        return { education: Object.assign(education, obj) };
-      }
-    });
+    this.setState(this.#updateStates(objName, obj));
   };
 
   deleteItem = (uuid, objName) => {
@@ -97,15 +91,7 @@ export default class InputForms extends React.Component {
     newArr.splice(index, 1);
     const obj = { array: newArr };
 
-    this.setState(() => {
-      if (objName === 'experience') {
-        return { experience: Object.assign(experience, obj) };
-      }
-
-      if (objName === 'education') {
-        return { education: Object.assign(education, obj) };
-      }
-    });
+    this.setState(this.#updateStates(objName, obj));
   };
 
   render() {
