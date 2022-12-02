@@ -29,13 +29,21 @@ export default class InputForms extends React.Component {
   };
 
   handleInput = (type, uuid, objName) => (e) => {
+    const { personal, experience, education } = this.state;
     let obj = {};
     obj[type] = e.target.value;
+
+    // if updating personal
+    if (!uuid && !objName) {
+      return this.setState({ personal: Object.assign(personal, obj) });
+    }
+
+    // else continue updating arrays
     let array = [];
     if (objName === 'experience') {
-      array = this.state.experience.array.slice();
+      array = experience.array.slice();
     } else if (objName === 'education') {
-      array = this.state.education.array.slice();
+      array = education.array.slice();
     }
 
     const newArr = array.map((item) => {
@@ -45,17 +53,7 @@ export default class InputForms extends React.Component {
 
     let stateObj = { array: newArr };
 
-    this.setState(this.#updateStates(objName, stateObj));
-
-    console.log(this.state);
-  };
-
-  handlePersonal = (type) => (e) => {
-    const { personal } = this.state;
-    let obj = {};
-    obj[type] = e.target.value;
-
-    this.setState({ personal: Object.assign(personal, obj) });
+    return this.setState(this.#updateStates(objName, stateObj));
   };
 
   addExtra = (objName) => () => {
@@ -102,7 +100,7 @@ export default class InputForms extends React.Component {
     return (
       <div className='forms'>
         <h3>Personal Information</h3>
-        <InputPersonal personal={personal} handleInput={this.handlePersonal} />
+        <InputPersonal personal={personal} handleInput={this.handleInput} />
 
         <h3>Experience</h3>
         {expArr.map((test) => (
