@@ -31,6 +31,7 @@ export default class InputForms extends React.Component {
 
     const newArr = array.map((item) => {
       if (item.uuid === uuid) return Object.assign(item, obj);
+      return item;
     });
 
     let stateObj = {};
@@ -56,9 +57,27 @@ export default class InputForms extends React.Component {
     console.log(this.state);
   };
 
-  addExp = () => {
-    this.setState({
-      expArr: this.state.expArr.concat(new Experience()),
+  addExtra = (objName) => () => {
+    const { experience, education } = this.state;
+    let obj = {};
+    obj.array = (() => {
+      if (objName === 'experience') {
+        return experience.array.concat(new Experience());
+      }
+
+      if (objName === 'education') {
+        return education.array.concat(new Education());
+      }
+    })();
+
+    this.setState(() => {
+      if (objName === 'experience') {
+        return { experience: Object.assign(experience, obj) };
+      }
+
+      if (objName === 'education') {
+        return { education: Object.assign(education, obj) };
+      }
     });
   };
 
@@ -69,12 +88,6 @@ export default class InputForms extends React.Component {
     newArr.splice(index, 1);
 
     this.setState({ expArr: newArr });
-  };
-
-  addEdu = () => {
-    this.setState({
-      eduArr: this.state.eduArr.concat(new Education()),
-    });
   };
 
   deleteEdu = (uuid) => {
@@ -107,7 +120,7 @@ export default class InputForms extends React.Component {
           />
         ))}
         {/* {expArr.map((exp) => exp)} */}
-        <button onClick={this.addExp}>Add more</button>
+        <button onClick={this.addExtra('experience')}>Add more</button>
 
         <h3>Education</h3>
         {eduArr.map((edu) => (
@@ -120,7 +133,7 @@ export default class InputForms extends React.Component {
           />
         ))}
         {/* {eduArr.map((edu) => edu)} */}
-        <button onClick={this.addEdu}>Add more</button>
+        <button onClick={this.addExtra('education')}>Add more</button>
       </div>
     );
   }
