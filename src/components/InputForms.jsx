@@ -102,6 +102,11 @@ export default class InputForms extends React.Component {
     this.setState(this.#updateStates(objName, obj));
   };
 
+  handleGetForms = () => {
+    const { getFormData } = this.props;
+    getFormData(this.state);
+  };
+
   render() {
     const { personal, experience, education } = this.state;
     const { array: expArr, name: expObjName } = experience;
@@ -142,8 +147,16 @@ export default class InputForms extends React.Component {
           <button type='button' onClick={this.addExtra('education')}>
             Add more
           </button>
+
+          <button
+            type='button'
+            className='submit-button'
+            onClick={this.handleGetForms}
+          >
+            Submit
+          </button>
         </div>
-        <Overview object={this.state} />
+        <Overview object={this.state} sticky />
       </div>
     );
   }

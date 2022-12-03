@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 
 export default class Overview extends Component {
   render() {
-    const { object } = this.props;
+    const { object, sticky } = this.props;
     const { personal, experience, education } = object;
+
     return (
-      <div id='overview'>
+      <div id='overview' className={sticky ? 'sticky' : null}>
         <div className='overview-personal'>
           <div className='overview-name'>
             {personal.firstName ? personal.firstName : 'Johnathan'}{' '}
