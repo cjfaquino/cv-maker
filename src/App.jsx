@@ -5,6 +5,7 @@ import InputForms from './components/InputForms';
 import Experience from './components/Experience';
 import Education from './components/Education';
 import PrintFriendly from './components/PrintFriendly';
+import MyFooter from './components/MyFooter/MyFooter';
 
 export default class App extends React.Component {
   constructor() {
@@ -38,12 +39,13 @@ export default class App extends React.Component {
     const { forms, submit } = this.state;
 
     return (
-      <div>
+      <div id='app'>
         {!submit ? (
           <InputForms getFormData={this.getFormData} object={forms} />
         ) : (
           <PrintFriendly object={forms} editFormData={this.editFormData} />
         )}
+        <MyFooter />
       </div>
     );
   }

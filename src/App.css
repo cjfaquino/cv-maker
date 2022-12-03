@@ -9,9 +9,14 @@ html {
   background-color: rgb(219, 219, 219);
 }
 
-#root {
-  display: flex;
+#app {
+  display: grid;
+  grid-template-columns: 1fr;
   justify-content: center;
+}
+
+#app {
+  width: 100%;
 }
 
 @media print {
