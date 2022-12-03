@@ -8,13 +8,22 @@ export default class Overview extends Component {
       <div id='overview'>
         <div className='overview-personal'>
           <div className='overview-name'>
-            {personal.firstName} {personal.lastName}
+            {personal.firstName ? personal.firstName : 'Johnathan'}{' '}
+            {personal.lastName ? personal.lastName : 'Doeman'}
           </div>
           <div className='overview-card'>
-            <div className='overview-address'>{personal.address}</div>
+            <div className='overview-address'>
+              {personal.address
+                ? personal.address
+                : '12345 Longlonglong St, San Longcity, CA'}
+            </div>
             <div className='overview-contact'>
-              <div className='overview-phone'>{personal.phone}</div>
-              <div className='overview-email'>{personal.email}</div>
+              <div className='overview-phone'>
+                {personal.phone ? personal.phone : '(123)-456-7890'}
+              </div>
+              <div className='overview-email'>
+                {personal.email ? personal.email : 'johnathan@doeman.net'}
+              </div>
             </div>
           </div>
         </div>
@@ -33,17 +42,21 @@ export default class Overview extends Component {
             <h3 className='overview-exp'>Experience</h3>
             {experience.array.map((item) => (
               <div key={item.uuid} className='experience-item'>
-                {item.from !== '' || item.until !== '' ? (
-                  <div className='experience-dates'>
-                    {item.from} - {item.until}
-                  </div>
-                ) : null}
-                <div className='experience-position'>{item.position}</div>
-                {item.name !== '' || item.city !== '' || item.state !== '' ? (
-                  <div className='experience-location'>
-                    {item.name} - {item.city}, {item.state}
-                  </div>
-                ) : null}
+                <div className='experience-dates'>
+                  {item.from ? item.from : 'From'} -{' '}
+                  {item.until ? item.until : 'Until'}
+                </div>
+
+                <div className='experience-position'>
+                  {item.position ? item.position : 'Position'}
+                </div>
+                <div className='experience-location'>
+                  {item.name ? item.name : 'Company name'} -{' '}
+                  <span className='experience-city'>
+                    {item.city ? item.city : 'City'},{' '}
+                    {item.state ? item.state : 'State'}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
@@ -55,20 +68,19 @@ export default class Overview extends Component {
             <h3 className='overview-edu'>Education</h3>
             {education.array.map((item) => (
               <div key={item.uuid} className='education-item'>
-                {item.name !== '' || item.city !== '' ? (
-                  <div className='education-name'>
-                    {item.name}
-                    {', '}
-                    <span className='education-location'>
-                      {item.city}, {item.state}
-                    </span>
-                  </div>
-                ) : null}
-                {item.degree !== '' || item.subject !== '' ? (
-                  <div className='education-degree'>
-                    {item.degree} - {item.subject}
-                  </div>
-                ) : null}
+                <div className='education-name'>
+                  {item.name ? item.name : 'College name'}
+                  {', '}
+                  <span className='education-location'>
+                    {item.city ? item.city : 'City'},{' '}
+                    {item.state ? item.state : 'State'}
+                  </span>
+                </div>
+
+                <div className='education-degree'>
+                  {item.degree ? item.degree : 'Degree'} -{' '}
+                  {item.subject ? item.subject : 'Subject'}
+                </div>
               </div>
             ))}
           </div>

@@ -5,6 +5,10 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+html {
+  background-color: rgb(219, 219, 219);
+}
+
 #root {
   display: flex;
   justify-content: center;
