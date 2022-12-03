@@ -9,5 +9,6 @@ export default class Experience {
     this.position = '';
     this.from = '';
     this.until = '';
+    this.summary = '';
   }
 }

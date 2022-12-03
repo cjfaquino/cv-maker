@@ -57,6 +57,7 @@ export default class Overview extends Component {
                     {item.state ? item.state : 'State'}
                   </span>
                 </div>
+                <div className='experience-summary'>{item.summary}</div>
               </div>
             ))}
           </div>

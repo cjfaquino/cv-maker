@@ -136,10 +136,11 @@ label textarea {
 .experience-item {
   margin-bottom: 20px;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-areas:
-    'dates position'
-    'dates location';
+    'position dates'
+    'location location'
+    'summary summary';
 }
 
 .experience-position {
@@ -149,11 +150,20 @@ label textarea {
 
 .experience-dates {
   grid-area: dates;
+  text-align: right;
 }
 
 .experience-city {
   font-size: 0.8rem;
   font-style: italic;
+}
+
+.experience-location {
+  margin-bottom: 10px;
+}
+
+.experience-summary {
+  grid-area: summary;
 }
 
 .education-name {

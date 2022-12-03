@@ -17,6 +17,7 @@ export default class InputExperience extends Component {
       position: 'Position',
       from: 'From',
       until: 'Until',
+      summary: 'Summary',
     };
 
     return (
@@ -79,6 +80,18 @@ export default class InputExperience extends Component {
               placeholder={label.until}
               value={exp.until}
               onChange={handleInput('until', exp.uuid, objName)}
+            />
+          </label>
+        </div>
+
+        <div className='input-experience-summary'>
+          <label>
+            <p>{label.summary}</p>
+            <textarea
+              type='text'
+              placeholder={label.summary}
+              value={exp.summary}
+              onChange={handleInput('summary', exp.uuid, objName)}
             />
           </label>
         </div>
