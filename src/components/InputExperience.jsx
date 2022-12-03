@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CustomInput from './CustomInput';
 
 export default class InputExperience extends Component {
   handleDelete = () => {
@@ -22,78 +23,64 @@ export default class InputExperience extends Component {
 
     return (
       <form className={elementClass}>
-        <label>
-          <p>{label.name}</p>
-          <input
-            type='text'
-            placeholder={label.name}
-            value={exp.name}
-            onChange={handleInput('name', exp.uuid, objName)}
-          />
-        </label>
-
-        <label>
-          <p>{label.position}</p>
-          <input
-            type='text'
-            placeholder={label.position}
-            value={exp.position}
-            onChange={handleInput('position', exp.uuid, objName)}
-          />
-        </label>
+        <CustomInput
+          type='name'
+          label={label}
+          obj={exp}
+          objName={objName}
+          handleInput={handleInput}
+        />
+        <CustomInput
+          type='position'
+          label={label}
+          obj={exp}
+          objName={objName}
+          handleInput={handleInput}
+        />
 
         <div className='input-experience-location'>
-          <label>
-            <p>{label.city}</p>
-            <input
-              type='text'
-              placeholder={label.city}
-              value={exp.city}
-              onChange={handleInput('city', exp.uuid, objName)}
-            />
-          </label>
-          <label>
-            <p>{label.state}</p>
-            <input
-              type='text'
-              placeholder={label.state}
-              value={exp.state}
-              onChange={handleInput('state', exp.uuid, objName)}
-            />
-          </label>
+          <CustomInput
+            type='city'
+            label={label}
+            obj={exp}
+            objName={objName}
+            handleInput={handleInput}
+          />
+          <CustomInput
+            type='state'
+            label={label}
+            obj={exp}
+            objName={objName}
+            handleInput={handleInput}
+          />
         </div>
 
         <div className='input-experience-dates'>
-          <label>
-            <p>{label.from}</p>
-            <input
-              type='text'
-              placeholder={label.from}
-              value={exp.from}
-              onChange={handleInput('from', exp.uuid, objName)}
-            />
-          </label>
-          <label>
-            <p>{label.until}</p>
-            <input
-              type='text'
-              placeholder={label.until}
-              value={exp.until}
-              onChange={handleInput('until', exp.uuid, objName)}
-            />
-          </label>
+          <CustomInput
+            type='from'
+            label={label}
+            obj={exp}
+            objName={objName}
+            handleInput={handleInput}
+          />
+          <CustomInput
+            type='until'
+            label={label}
+            obj={exp}
+            objName={objName}
+            handleInput={handleInput}
+          />
         </div>
 
         <div className='input-experience-summary'>
-          <label>
-            <p>{label.summary}</p>
-            <textarea
-              type='text'
-              placeholder={label.summary}
-              value={exp.summary}
-              onChange={handleInput('summary', exp.uuid, objName)}
-            />
-          </label>
+          <CustomInput
+            textarea
+            type='summary'
+            label={label}
+            obj={exp}
+            objName={objName}
+            handleInput={handleInput}
+          />
         </div>
 
         <button

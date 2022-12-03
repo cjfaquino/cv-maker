@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CustomInput from './CustomInput';
 
 export default class InputEducation extends Component {
   handleDelete = () => {
@@ -20,55 +21,43 @@ export default class InputEducation extends Component {
     };
     return (
       <form className={elementClass}>
-        <label>
-          <p>{label.degree}</p>
-          <input
-            type='text'
-            placeholder={label.degree}
-            value={edu.degree}
-            onChange={handleInput('degree', edu.uuid, objName)}
-          />
-        </label>
-
-        <label>
-          <p>{label.subject}</p>
-          <input
-            type='text'
-            placeholder={label.subject}
-            value={edu.subject}
-            onChange={handleInput('subject', edu.uuid, objName)}
-          />
-        </label>
-
-        <label>
-          <p>{label.name}</p>
-          <input
-            type='text'
-            placeholder={label.name}
-            value={edu.name}
-            onChange={handleInput('name', edu.uuid, objName)}
-          />
-        </label>
+        <CustomInput
+          type='degree'
+          label={label}
+          obj={edu}
+          objName={objName}
+          handleInput={handleInput}
+        />
+        <CustomInput
+          type='subject'
+          label={label}
+          obj={edu}
+          objName={objName}
+          handleInput={handleInput}
+        />
+        <CustomInput
+          type='name'
+          label={label}
+          obj={edu}
+          objName={objName}
+          handleInput={handleInput}
+        />
 
         <div className='input-education-location'>
-          <label>
-            <p>{label.city}</p>
-            <input
-              type='text'
-              placeholder={label.city}
-              value={edu.city}
-              onChange={handleInput('city', edu.uuid, objName)}
-            />
-          </label>
-          <label>
-            <p>{label.state}</p>
-            <input
-              type='text'
-              placeholder={label.state}
-              value={edu.state}
-              onChange={handleInput('state', edu.uuid, objName)}
-            />
-          </label>
+          <CustomInput
+            type='city'
+            label={label}
+            obj={edu}
+            objName={objName}
+            handleInput={handleInput}
+          />
+          <CustomInput
+            type='state'
+            label={label}
+            obj={edu}
+            objName={objName}
+            handleInput={handleInput}
+          />
         </div>
 
         <button
