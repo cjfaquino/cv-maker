@@ -14,6 +14,10 @@ export default class App extends React.Component {
     this.setState({ forms: obj, submit: true });
   };
 
+  editFormData = () => {
+    this.setState({ submit: false });
+  };
+
   render() {
     const { forms, submit } = this.state;
 
@@ -25,7 +29,11 @@ export default class App extends React.Component {
           <div>
             <Overview object={forms} />
 
-            <button type='button' className='edit-button'>
+            <button
+              type='button'
+              className='edit-button'
+              onClick={this.editFormData}
+            >
               Edit
             </button>
             <button type='button' className='submit-button'>

@@ -128,8 +128,12 @@ export default class InputForms extends React.Component {
               exp={test}
             />
           ))}
-          {/* {expArr.map((exp) => exp)} */}
-          <button type='button' onClick={this.addExtra('experience')}>
+
+          <button
+            type='button'
+            onClick={this.addExtra('experience')}
+            className='add-button'
+          >
             Add more
           </button>
 
@@ -143,8 +147,12 @@ export default class InputForms extends React.Component {
               edu={edu}
             />
           ))}
-          {/* {eduArr.map((edu) => edu)} */}
-          <button type='button' onClick={this.addExtra('education')}>
+
+          <button
+            type='button'
+            onClick={this.addExtra('education')}
+            className='add-button'
+          >
             Add more
           </button>
 

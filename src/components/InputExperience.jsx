@@ -96,7 +96,11 @@ export default class InputExperience extends Component {
           </label>
         </div>
 
-        <button type='button' onClick={this.handleDelete}>
+        <button
+          type='button'
+          onClick={this.handleDelete}
+          className='delete-button'
+        >
           Delete
         </button>
       </form>
