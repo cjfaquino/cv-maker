@@ -13,3 +13,14 @@ html {
   display: flex;
   justify-content: center;
 }
+
+@media print {
+  #overview {
+    box-shadow: none !important;
+  }
+
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}

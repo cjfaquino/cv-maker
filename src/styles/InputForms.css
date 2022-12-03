@@ -44,6 +44,10 @@ button {
   background: green;
 }
 
+.submit-button.no-print {
+  margin-bottom: 40px;
+}
+
 .submit-button:hover {
   background: rgb(0, 162, 0);
 }

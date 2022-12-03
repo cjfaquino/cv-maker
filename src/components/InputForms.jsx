@@ -9,20 +9,9 @@ import Education from './Education';
 import Overview from './Overview';
 
 export default class InputForms extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      personal: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        address: '',
-        phone: '',
-        summary: '',
-      },
-      experience: { name: 'experience', array: [new Experience()] },
-      education: { name: 'education', array: [new Education()] },
-    };
+  constructor(props) {
+    super(props);
+    this.state = props.object;
   }
 
   #updateStates = (objName, change) => {
