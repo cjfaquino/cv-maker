@@ -43,13 +43,9 @@ label textarea {
   height: 150px;
 }
 
-.wrapper {
-  width: 1300px;
-}
-
 #display {
   display: flex;
-  gap: 50px;
+  justify-content: center;
   margin: 30px 0;
 }
 
@@ -82,8 +78,9 @@ label textarea {
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
-  width: 100%;
+  width: 800px;
   height: 100vh;
+  margin-left: 50px;
   padding: 20px;
   border-radius: 5px;
   background-color: white;
@@ -96,7 +93,7 @@ label textarea {
 }
 
 .overview-personal {
-  height: 100px;
+  height: fit-content;
 }
 
 .overview-card > * {
@@ -178,4 +175,55 @@ label textarea {
   font-weight: 400;
   font-size: 0.8rem;
   font-style: italic;
+}
+
+@media only screen and (max-width: 1400px) {
+  html {
+    font-size: 75%;
+  }
+
+  #forms,
+  button,
+  label input,
+  label textarea {
+    font-size: 1.5rem;
+  }
+
+  #display,
+  #forms,
+  #overview {
+    width: 600px !important;
+  }
+
+  label input,
+  button {
+    height: 40px;
+  }
+
+  #display {
+    flex-direction: column;
+  }
+
+  #overview {
+    margin: 30px 0 0 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 50%;
+  }
+
+  #display,
+  #forms,
+  #overview {
+    width: 800px !important;
+  }
+
+  #forms,
+  button,
+  label input,
+  label textarea {
+    font-size: 2rem;
+  }
 }
