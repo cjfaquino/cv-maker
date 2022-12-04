@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import Overview from './Overview';
 
 export default class PrintFriendly extends Component {
+  handleEdit = () => {
+    const { changeSubmit } = this.props;
+    changeSubmit();
+  };
+
   render() {
-    const { object, editFormData } = this.props;
+    const { object } = this.props;
     return (
       <div className='print-menu'>
         <div className='print-buttons'>
           <button
             type='button'
             className='edit-button no-print'
-            onClick={editFormData}
+            onClick={this.handleEdit}
           >
             Edit
           </button>

@@ -8,11 +8,12 @@ import Experience from './Experience';
 import Education from './Education';
 import Overview from './Overview';
 import ObjectModel from './ObjectModel';
+import PrintFriendly from './PrintFriendly';
 
 export default class InputForms extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props.object;
+    this.state = { ...new ObjectModel(), submit: false };
   }
 
   #updateStates = (objName, change) => {
@@ -92,9 +93,16 @@ export default class InputForms extends React.Component {
     this.setState(this.#updateStates(objName, obj));
   };
 
-  handleGetForms = () => {
-    const { getFormData } = this.props;
-    getFormData(this.state);
+  changeSubmit = () => {
+    const obj = { submit: false };
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    this.setState(Object.assign(this.state, obj));
+  };
+
+  handleSubmit = () => {
+    const obj = { submit: true };
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    this.setState(Object.assign(this.state, obj));
   };
 
   handleReset = () => {
@@ -102,73 +110,87 @@ export default class InputForms extends React.Component {
   };
 
   render() {
-    const { personal, experience, education } = this.state;
+    const { personal, experience, education, submit } = this.state;
     const { array: expArr, name: expObjName } = experience;
     const { array: eduArr, name: eduObjName } = education;
 
-    return (
-      <div id='display' className='wrapper'>
-        <div id='forms'>
-          <h3>Personal Information</h3>
-          <InputPersonal personal={personal} handleInput={this.handleInput} />
+    const currentDispaly = () => {
+      if (submit) {
+        return (
+          <PrintFriendly
+            object={{ personal, experience, education }}
+            changeSubmit={this.changeSubmit}
+          />
+        );
+      }
 
-          <h3>Experience</h3>
-          {expArr.map((test) => (
-            <InputExperience
-              key={test.uuid}
-              handleInput={this.handleInput}
-              deleteItem={this.deleteItem}
-              objName={expObjName}
-              exp={test}
-            />
-          ))}
-
-          <button
-            type='button'
-            onClick={this.addExtra('experience')}
-            className='add-button'
-          >
-            Add more
-          </button>
-
-          <h3>Education</h3>
-          {eduArr.map((edu) => (
-            <InputEducation
-              key={edu.uuid}
-              handleInput={this.handleInput}
-              deleteItem={this.deleteItem}
-              objName={eduObjName}
-              edu={edu}
-            />
-          ))}
-
-          <button
-            type='button'
-            onClick={this.addExtra('education')}
-            className='add-button'
-          >
-            Add more
-          </button>
-
-          <div className='final-buttons'>
-            <button
-              type='button'
-              className='reset-button'
-              onClick={this.handleReset}
-            >
-              Reset
-            </button>
-            <button
-              type='button'
-              className='submit-button'
-              onClick={this.handleGetForms}
-            >
-              Submit
-            </button>
+      if (!submit) {
+        return (
+          <div id='display' className='wrapper'>
+            <div id='forms'>
+              <h3>Personal Information</h3>
+              <InputPersonal
+                personal={personal}
+                handleInput={this.handleInput}
+              />
+              <h3>Experience</h3>
+              {expArr.map((test) => (
+                <InputExperience
+                  key={test.uuid}
+                  handleInput={this.handleInput}
+                  deleteItem={this.deleteItem}
+                  objName={expObjName}
+                  exp={test}
+                />
+              ))}
+              <button
+                type='button'
+                onClick={this.addExtra('experience')}
+                className='add-button'
+              >
+                Add more
+              </button>
+              <h3>Education</h3>
+              {eduArr.map((edu) => (
+                <InputEducation
+                  key={edu.uuid}
+                  handleInput={this.handleInput}
+                  deleteItem={this.deleteItem}
+                  objName={eduObjName}
+                  edu={edu}
+                />
+              ))}
+              <button
+                type='button'
+                onClick={this.addExtra('education')}
+                className='add-button'
+              >
+                Add more
+              </button>
+              <div className='final-buttons'>
+                <button
+                  type='button'
+                  className='reset-button'
+                  onClick={this.handleReset}
+                >
+                  Reset
+                </button>
+                <button
+                  type='button'
+                  className='submit-button'
+                  onClick={this.handleSubmit}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+            <Overview object={this.state} sticky />
           </div>
-        </div>
-        <Overview object={this.state} sticky />
-      </div>
-    );
+        );
+      }
+      return null;
+    };
+
+    return currentDispaly();
   }
 }
