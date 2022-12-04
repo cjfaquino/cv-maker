@@ -4,7 +4,7 @@ import './MyHeader.css';
 export default class MyHeader extends PureComponent {
   render() {
     return (
-      <header>
+      <header className='no-print'>
         <div className='wrapper'>
           <h1>CV Maker</h1>
         </div>

@@ -13,22 +13,18 @@ html {
   background-color: rgb(219, 219, 219);
 }
 
-html,
-body,
-#root,
-#app {
-  height: 100%;
-}
-
 #app {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 
 @media print {
   #overview {
     box-shadow: none !important;
+    position: absolute;
+    top: 0;
   }
 
   .no-print,
