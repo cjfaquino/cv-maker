@@ -7,6 +7,7 @@ import InputExperience from './InputExperience';
 import Experience from './Experience';
 import Education from './Education';
 import Overview from './Overview';
+import ObjectModel from './ObjectModel';
 
 export default class InputForms extends React.Component {
   constructor(props) {
@@ -96,6 +97,10 @@ export default class InputForms extends React.Component {
     getFormData(this.state);
   };
 
+  handleReset = () => {
+    this.setState(new ObjectModel());
+  };
+
   render() {
     const { personal, experience, education } = this.state;
     const { array: expArr, name: expObjName } = experience;
@@ -145,13 +150,22 @@ export default class InputForms extends React.Component {
             Add more
           </button>
 
-          <button
-            type='button'
-            className='submit-button'
-            onClick={this.handleGetForms}
-          >
-            Submit
-          </button>
+          <div className='final-buttons'>
+            <button
+              type='button'
+              className='reset-button'
+              onClick={this.handleReset}
+            >
+              Reset
+            </button>
+            <button
+              type='button'
+              className='submit-button'
+              onClick={this.handleGetForms}
+            >
+              Submit
+            </button>
+          </div>
         </div>
         <Overview object={this.state} sticky />
       </div>

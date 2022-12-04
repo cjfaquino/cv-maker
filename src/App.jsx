@@ -2,28 +2,16 @@ import './App.css';
 
 import React from 'react';
 import InputForms from './components/InputForms';
-import Experience from './components/Experience';
-import Education from './components/Education';
 import PrintFriendly from './components/PrintFriendly';
 import MyHeader from './components/MyHeader/MyHeader';
 import MyFooter from './components/MyFooter/MyFooter';
+import ObjectModel from './components/ObjectModel';
 
 export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      forms: {
-        personal: {
-          firstName: '',
-          lastName: '',
-          email: '',
-          address: '',
-          phone: '',
-          summary: '',
-        },
-        experience: { name: 'experience', array: [new Experience()] },
-        education: { name: 'education', array: [new Education()] },
-      },
+      forms: new ObjectModel(),
       submit: false,
     };
   }
