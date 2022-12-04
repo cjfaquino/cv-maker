@@ -5,7 +5,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(0, 81, 255);
+  background-color: var(--main-theme-color);
 }
 
 header h1 {

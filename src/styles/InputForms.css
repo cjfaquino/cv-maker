@@ -10,11 +10,20 @@
 
 h3 {
   margin-top: 30px;
-  color: blue;
+  color: black;
 }
 
 h3:first-child {
   margin-top: 0;
+}
+
+label {
+  color: grey;
+}
+
+input:focus,
+textarea:focus {
+  border-left: 3px solid var(--main-theme-color);
 }
 
 button {
