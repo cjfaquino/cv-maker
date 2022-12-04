@@ -62,10 +62,6 @@ button {
   background: green;
 }
 
-.submit-button.no-print {
-  margin-bottom: 40px;
-}
-
 .submit-button:hover {
   background: rgb(0, 162, 0);
 }
@@ -141,7 +137,6 @@ label textarea {
 }
 
 #overview.sticky {
-  /* margin-left: 50px; */
   height: 100vh;
 }
 
@@ -237,11 +232,19 @@ label textarea {
 }
 
 .print-menu {
+  margin-top: 30px;
   display: flex;
   width: 800px;
   flex-direction: column;
   align-items: center;
   height: calc(100% - var(--footer-size));
+}
+
+.print-buttons {
+  width: 100%;
+  display: flex;
+  gap: var(--input-gap);
+  margin-bottom: 40px;
 }
 
 @media (max-width: 1680px) {
@@ -307,5 +310,17 @@ label textarea {
   label input,
   label textarea {
     font-size: 2rem;
+  }
+
+  .print-buttons {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    margin: 0;
+  }
+
+  .print-buttons button {
+    margin: 0 !important;
   }
 }
