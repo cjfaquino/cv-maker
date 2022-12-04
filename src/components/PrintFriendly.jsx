@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Overview from './Overview';
 
 export default class PrintFriendly extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   handleEdit = () => {
     const { changeSubmit } = this.props;
     changeSubmit();
@@ -10,7 +14,7 @@ export default class PrintFriendly extends Component {
   render() {
     const { object } = this.props;
     return (
-      <div className='print-menu'>
+      <div id='display' className='print-menu'>
         <div className='print-buttons'>
           <button
             type='button'
