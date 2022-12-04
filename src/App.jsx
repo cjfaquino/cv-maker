@@ -5,6 +5,7 @@ import InputForms from './components/InputForms';
 import Experience from './components/Experience';
 import Education from './components/Education';
 import PrintFriendly from './components/PrintFriendly';
+import MyHeader from './components/MyHeader/MyHeader';
 import MyFooter from './components/MyFooter/MyFooter';
 
 export default class App extends React.Component {
@@ -40,6 +41,7 @@ export default class App extends React.Component {
 
     return (
       <div id='app'>
+        <MyHeader />
         {!submit ? (
           <InputForms getFormData={this.getFormData} object={forms} />
         ) : (
