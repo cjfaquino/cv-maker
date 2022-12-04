@@ -5,7 +5,7 @@ export default class PrintFriendly extends Component {
   render() {
     const { object, editFormData } = this.props;
     return (
-      <div>
+      <div className='print-menu'>
         <button
           type='button'
           className='edit-button no-print'
