@@ -17,7 +17,7 @@ export default class Overview extends Component {
         name: 'Company name',
         city: 'City',
         state: 'State',
-        position: 'Postion',
+        position: 'Position',
         from: 'From',
         until: 'Until',
       },
