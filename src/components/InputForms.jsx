@@ -14,28 +14,25 @@ const InputForms = () => {
   const [storedObj, setStoredObj] = useState(new ObjectModel());
   const [submitState, setSubmitState] = useState(false);
 
-  const updateStates = (objName, change) => {
+  const mergeObjects = (objName, change) => {
     const { personal, experience, education } = storedObj;
     if (objName === 'experience') {
       return {
-        personal,
-        education,
-        experience: Object.assign(experience, change),
+        ...storedObj,
+        experience: { ...experience, ...change },
       };
     }
     if (objName === 'education') {
       return {
-        personal,
-        experience,
-        education: Object.assign(education, change),
+        ...storedObj,
+        education: { ...education, ...change },
       };
     }
 
     if (objName === 'personal') {
       return {
-        experience,
-        education,
-        personal: Object.assign(personal, change),
+        ...storedObj,
+        personal: { ...personal, ...change },
       };
     }
     throw Error('Could not catch objName');
@@ -48,7 +45,7 @@ const InputForms = () => {
 
     // if updating personal
     if (!uuid && !objName) {
-      return setStoredObj(updateStates('personal', obj));
+      return setStoredObj(mergeObjects('personal', obj));
     }
 
     // else continue updating arrays
@@ -64,9 +61,9 @@ const InputForms = () => {
       return item;
     });
 
-    const stateObj = { array: newArr };
+    const changed = { array: newArr };
 
-    return setStoredObj(updateStates(objName, stateObj));
+    return setStoredObj(mergeObjects(objName, changed));
   };
 
   const addExtra = (objName) => () => {
@@ -85,26 +82,26 @@ const InputForms = () => {
       })(),
     };
 
-    setStoredObj(updateStates(objName, obj));
+    setStoredObj(mergeObjects(objName, obj));
   };
 
   const deleteItem = (uuid, objName) => {
     const { experience, education } = storedObj;
 
     let index = null;
-    let newArr = [];
+    let array = [];
 
     if (objName === 'experience') {
-      index = experience.array.findIndex((exp) => exp.uuid === uuid);
-      newArr = experience.array.slice();
+      array = experience.array.slice();
     } else if (objName === 'education') {
-      index = education.array.findIndex((edu) => edu.uuid === uuid);
-      newArr = education.array.slice();
+      array = education.array.slice();
     }
-    newArr.splice(index, 1);
-    const obj = { array: newArr };
+    index = array.findIndex((item) => item.uuid === uuid);
 
-    setStoredObj(updateStates(objName, obj));
+    array.splice(index, 1);
+    const changed = { array };
+
+    setStoredObj(mergeObjects(objName, changed));
   };
 
   const changeSubmit = () => {
@@ -116,6 +113,7 @@ const InputForms = () => {
   };
 
   const handleReset = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setStoredObj(new ObjectModel());
   };
 
