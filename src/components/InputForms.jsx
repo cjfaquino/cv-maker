@@ -1,6 +1,6 @@
 import '../styles/InputForms.css';
 
-import React from 'react';
+import React, { useState } from 'react';
 import InputPersonal from './InputPersonal';
 import InputEducation from './InputEducation';
 import InputExperience from './InputExperience';
@@ -10,31 +10,45 @@ import Overview from './Overview';
 import ObjectModel from './ObjectModel';
 import PrintFriendly from './PrintFriendly';
 
-export default class InputForms extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...new ObjectModel(), submit: false };
-  }
+const InputForms = () => {
+  const [storedObj, setStoredObj] = useState(new ObjectModel());
+  const [submitState, setSubmitState] = useState(false);
 
-  #updateStates = (objName, change) => {
-    const { experience, education } = this.state;
+  const updateStates = (objName, change) => {
+    const { personal, experience, education } = storedObj;
     if (objName === 'experience') {
-      return { experience: Object.assign(experience, change) };
+      return {
+        personal,
+        education,
+        experience: Object.assign(experience, change),
+      };
     }
     if (objName === 'education') {
-      return { education: Object.assign(education, change) };
+      return {
+        personal,
+        experience,
+        education: Object.assign(education, change),
+      };
+    }
+
+    if (objName === 'personal') {
+      return {
+        experience,
+        education,
+        personal: Object.assign(personal, change),
+      };
     }
     throw Error('Could not catch objName');
   };
 
-  handleInput = (type, uuid, objName) => (e) => {
-    const { personal, experience, education } = this.state;
+  const handleInput = (type, uuid, objName) => (e) => {
+    const { experience, education } = storedObj;
     const obj = {};
     obj[type] = e.target.value;
 
     // if updating personal
     if (!uuid && !objName) {
-      return this.setState({ personal: Object.assign(personal, obj) });
+      return setStoredObj(updateStates('personal', obj));
     }
 
     // else continue updating arrays
@@ -52,11 +66,11 @@ export default class InputForms extends React.Component {
 
     const stateObj = { array: newArr };
 
-    return this.setState(this.#updateStates(objName, stateObj));
+    return setStoredObj(updateStates(objName, stateObj));
   };
 
-  addExtra = (objName) => () => {
-    const { experience, education } = this.state;
+  const addExtra = (objName) => () => {
+    const { experience, education } = storedObj;
     const obj = {
       array: (() => {
         if (objName === 'experience') {
@@ -71,11 +85,11 @@ export default class InputForms extends React.Component {
       })(),
     };
 
-    this.setState(this.#updateStates(objName, obj));
+    setStoredObj(updateStates(objName, obj));
   };
 
-  deleteItem = (uuid, objName) => {
-    const { experience, education } = this.state;
+  const deleteItem = (uuid, objName) => {
+    const { experience, education } = storedObj;
 
     let index = null;
     let newArr = [];
@@ -90,107 +104,100 @@ export default class InputForms extends React.Component {
     newArr.splice(index, 1);
     const obj = { array: newArr };
 
-    this.setState(this.#updateStates(objName, obj));
+    setStoredObj(updateStates(objName, obj));
   };
 
-  changeSubmit = () => {
-    const obj = { submit: false };
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    this.setState(Object.assign(this.state, obj));
+  const changeSubmit = () => {
+    setSubmitState(false);
   };
 
-  handleSubmit = () => {
-    const obj = { submit: true };
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    this.setState(Object.assign(this.state, obj));
+  const handleSubmit = () => {
+    setSubmitState(true);
   };
 
-  handleReset = () => {
-    this.setState(new ObjectModel());
+  const handleReset = () => {
+    setStoredObj(new ObjectModel());
   };
 
-  render() {
-    const { personal, experience, education, submit } = this.state;
-    const { array: expArr, name: expObjName } = experience;
-    const { array: eduArr, name: eduObjName } = education;
+  const { personal, experience, education } = storedObj;
+  const { array: expArr, name: expObjName } = experience;
+  const { array: eduArr, name: eduObjName } = education;
 
-    const currentDispaly = () => {
-      if (submit) {
-        return (
-          <PrintFriendly
-            object={{ personal, experience, education }}
-            changeSubmit={this.changeSubmit}
-          />
-        );
-      }
+  const currentDispaly = () => {
+    if (submitState) {
+      return (
+        <PrintFriendly
+          object={{ personal, experience, education }}
+          changeSubmit={changeSubmit}
+        />
+      );
+    }
 
-      if (!submit) {
-        return (
-          <div id='display' className='wrapper'>
-            <div id='forms'>
-              <h3>Personal Information</h3>
-              <InputPersonal
-                personal={personal}
-                handleInput={this.handleInput}
+    if (!submitState) {
+      return (
+        <div id='display' className='wrapper'>
+          <div id='forms'>
+            <h3>Personal Information</h3>
+            <InputPersonal personal={personal} handleInput={handleInput} />
+            <h3>Experience</h3>
+            {expArr.map((test) => (
+              <InputExperience
+                key={test.uuid}
+                handleInput={handleInput}
+                deleteItem={deleteItem}
+                objName={expObjName}
+                exp={test}
               />
-              <h3>Experience</h3>
-              {expArr.map((test) => (
-                <InputExperience
-                  key={test.uuid}
-                  handleInput={this.handleInput}
-                  deleteItem={this.deleteItem}
-                  objName={expObjName}
-                  exp={test}
-                />
-              ))}
+            ))}
+            <button
+              type='button'
+              onClick={addExtra('experience')}
+              className='add-button'
+            >
+              Add more
+            </button>
+            <h3>Education</h3>
+            {eduArr.map((edu) => (
+              <InputEducation
+                key={edu.uuid}
+                handleInput={handleInput}
+                deleteItem={deleteItem}
+                objName={eduObjName}
+                edu={edu}
+              />
+            ))}
+            <button
+              type='button'
+              onClick={addExtra('education')}
+              className='add-button'
+            >
+              Add more
+            </button>
+            <div className='final-buttons'>
               <button
                 type='button'
-                onClick={this.addExtra('experience')}
-                className='add-button'
+                className='reset-button'
+                onClick={handleReset}
               >
-                Add more
+                Reset
               </button>
-              <h3>Education</h3>
-              {eduArr.map((edu) => (
-                <InputEducation
-                  key={edu.uuid}
-                  handleInput={this.handleInput}
-                  deleteItem={this.deleteItem}
-                  objName={eduObjName}
-                  edu={edu}
-                />
-              ))}
               <button
                 type='button'
-                onClick={this.addExtra('education')}
-                className='add-button'
+                className='submit-button'
+                onClick={handleSubmit}
               >
-                Add more
+                Submit
               </button>
-              <div className='final-buttons'>
-                <button
-                  type='button'
-                  className='reset-button'
-                  onClick={this.handleReset}
-                >
-                  Reset
-                </button>
-                <button
-                  type='button'
-                  className='submit-button'
-                  onClick={this.handleSubmit}
-                >
-                  Submit
-                </button>
-              </div>
             </div>
-            <Overview object={this.state} sticky />
           </div>
-        );
-      }
-      return null;
-    };
+          <Overview object={storedObj} sticky />
+        </div>
+      );
+    }
+    return null;
+  };
 
-    return currentDispaly();
-  }
-}
+  return currentDispaly();
+};
+
+export default InputForms;
